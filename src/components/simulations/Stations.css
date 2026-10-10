@@ -1,0 +1,485 @@
+/* src/components/simulations/Stations.css */
+/* Stations design styling for CongruenceQuest */
+
+.station-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 100%;
+  height: 100%;
+  margin: 0 auto;
+  gap: 12px;
+  box-sizing: border-box;
+}
+
+.station-header {
+  text-align: center;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  flex-shrink: 0;
+}
+
+.station-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 18px;
+  background: rgba(255, 193, 7, 0.18);
+  border: 1.5px solid rgba(255, 193, 7, 0.45);
+  border-radius: var(--radius-pill);
+  color: var(--gold);
+  font-size: 0.95rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.7px;
+}
+
+.station-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.6rem, 2.4vw, 2.2rem);
+  font-weight: 900;
+  margin: 2px 0;
+  color: #fff;
+  line-height: 1.15;
+}
+
+.station-instruction {
+  font-size: clamp(1.05rem, 1.25vw, 1.22rem);
+  color: rgba(255, 255, 255, 0.95);
+  margin: 0;
+  line-height: 1.45;
+  max-width: 1100px;
+  font-weight: 600;
+}
+
+.station-workspace {
+  background: rgba(16, 15, 48, 0.92);
+  border: 1.5px solid rgba(255, 255, 255, 0.16);
+  border-radius: 22px;
+  padding: 16px 24px;
+  width: 100%;
+  flex: 1;
+  min-height: 0;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+  justify-content: stretch;
+  gap: 14px;
+  box-sizing: border-box;
+}
+
+/* 2-Column Responsive Layout - Stretches and fills available space */
+.station-grid-2col {
+  display: grid;
+  grid-template-columns: 1.05fr 1fr;
+  gap: 22px;
+  width: 100%;
+  flex: 1;
+  min-height: 0;
+  align-items: stretch;
+  box-sizing: border-box;
+}
+
+.station-col {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 12px;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+/* Controls Grid */
+.station-controls-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  width: 100%;
+  flex-shrink: 0;
+}
+
+.pin-chip {
+  padding: 9px 20px;
+  border-radius: var(--radius-pill);
+  border: 1.5px solid rgba(255, 255, 255, 0.24);
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+  cursor: pointer;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(0.98rem, 1.1vw, 1.12rem);
+  transition: var(--transition-fast);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  min-height: 42px;
+}
+
+.pin-chip:hover {
+  border-color: var(--gold);
+  background: rgba(255, 193, 7, 0.18);
+  transform: translateY(-1px);
+}
+
+.pin-chip.active {
+  border-color: var(--gold);
+  background: rgba(255, 193, 7, 0.28);
+  color: var(--gold);
+  box-shadow: 0 0 16px rgba(255, 193, 7, 0.45);
+}
+
+.pin-chip.explored {
+  border-color: rgba(46, 204, 113, 0.65);
+}
+
+/* Stepper Controls */
+.stepper-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1.5px solid rgba(255, 255, 255, 0.14);
+  border-radius: 14px;
+  padding: 10px 18px;
+  box-sizing: border-box;
+}
+
+.stepper-label {
+  font-size: 1.12rem;
+  font-weight: 800;
+  color: #ffffff;
+}
+
+.stepper-btn {
+  width: 42px;
+  height: 42px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.14);
+  border: 1.5px solid rgba(255, 255, 255, 0.28);
+  color: #fff;
+  font-weight: 900;
+  font-size: 1.35rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: var(--transition-fast);
+}
+
+.stepper-btn:hover:not(:disabled) {
+  background: var(--gold);
+  color: #1a1a2e;
+  border-color: var(--gold);
+  transform: scale(1.05);
+}
+
+.stepper-btn:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.stepper-value {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: 1.25rem;
+  color: var(--gold);
+  min-width: 75px;
+  text-align: center;
+}
+
+/* Canvas Wrapper Card */
+.station-canvas-card {
+  width: 100%;
+  background: rgba(10, 10, 35, 0.8);
+  border-radius: 18px;
+  padding: 14px 18px;
+  border: 1.5px solid rgba(255, 255, 255, 0.14);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  position: relative;
+}
+
+/* Info & Breakdown Cards (Fills whitespace with educational gold) */
+.station-info-card {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1.5px solid rgba(255, 255, 255, 0.13);
+  border-radius: 16px;
+  padding: 14px 18px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.station-info-title {
+  font-size: 1.15rem;
+  font-weight: 900;
+  color: var(--gold);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.station-info-body {
+  font-size: 1.02rem;
+  color: rgba(255, 255, 255, 0.92);
+  line-height: 1.5;
+  margin: 0;
+  font-weight: 600;
+}
+
+/* Mini Grid for Criteria Tracker */
+.criterion-mini-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 8px;
+  width: 100%;
+  margin-top: 4px;
+}
+
+.criterion-mini-pill {
+  padding: 8px 12px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1.5px solid rgba(255, 255, 255, 0.14);
+  color: #fff;
+  font-size: 0.95rem;
+  font-weight: 800;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: all 0.2s ease;
+}
+
+.criterion-mini-pill:hover {
+  background: rgba(255, 193, 7, 0.15);
+  border-color: var(--gold);
+}
+
+.criterion-mini-pill.active {
+  border-color: var(--gold);
+  background: rgba(255, 193, 7, 0.24);
+  color: var(--gold);
+}
+
+.criterion-mini-pill.tested {
+  border-color: rgba(46, 204, 113, 0.6);
+  color: #86efac;
+}
+
+/* Spec Comparison Table (CutTheCopy) */
+.spec-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 6px;
+  font-size: 1.02rem;
+  box-sizing: border-box;
+}
+
+.spec-table th {
+  padding: 8px 12px;
+  text-align: left;
+  color: var(--gold);
+  font-weight: 800;
+  border-bottom: 1.5px solid rgba(255, 255, 255, 0.15);
+}
+
+.spec-table td {
+  padding: 9px 12px;
+  text-align: left;
+  color: #ffffff;
+  font-weight: 700;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* Feedback Box */
+.station-feedback-box {
+  width: 100%;
+  padding: 14px 20px;
+  border-radius: 16px;
+  font-size: clamp(1.02rem, 1.2vw, 1.18rem);
+  line-height: 1.5;
+  text-align: left;
+  font-weight: 700;
+  box-sizing: border-box;
+}
+
+.station-feedback-box.test {
+  background: rgba(46, 204, 113, 0.2);
+  border: 1.5px solid rgba(46, 204, 113, 0.55);
+  color: #2ecc71;
+}
+
+.station-feedback-box.ambiguous {
+  background: rgba(231, 76, 60, 0.2);
+  border: 1.5px solid rgba(231, 76, 60, 0.55);
+  color: #ff7675;
+}
+
+.station-feedback-box.info {
+  background: rgba(52, 152, 219, 0.2);
+  border: 1.5px solid rgba(52, 152, 219, 0.55);
+  color: #74b9ff;
+}
+
+/* Confirmation Question */
+.confirm-question-card {
+  width: 100%;
+  background: rgba(255, 193, 7, 0.12);
+  border: 1.5px solid rgba(255, 193, 7, 0.4);
+  border-radius: 16px;
+  padding: 14px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  box-sizing: border-box;
+}
+
+.confirm-question-title {
+  font-weight: 900;
+  color: var(--gold);
+  font-size: 1.18rem;
+  line-height: 1.4;
+}
+
+/* Success Card */
+.station-success-card {
+  width: 100%;
+  background: linear-gradient(135deg, rgba(46, 204, 113, 0.24), rgba(26, 188, 156, 0.16));
+  border: 2px solid rgba(46, 204, 113, 0.6);
+  border-radius: 18px;
+  padding: 16px 22px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  box-sizing: border-box;
+}
+
+.station-success-icon {
+  font-size: 2.5rem;
+  line-height: 1;
+}
+
+.station-success-title {
+  font-family: var(--font-display);
+  font-size: 1.45rem;
+  font-weight: 900;
+  color: #2ecc71;
+}
+
+.station-success-desc {
+  font-size: 1.05rem;
+  color: #fff;
+  margin: 0;
+  line-height: 1.5;
+  font-weight: 600;
+}
+
+/* Proof Ordering List in Stations */
+.proof-steps-list {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.proof-step-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 18px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1.5px solid rgba(255, 255, 255, 0.16);
+  cursor: pointer;
+  transition: var(--transition-fast);
+  box-sizing: border-box;
+}
+
+.proof-step-item:hover {
+  background: rgba(255, 255, 255, 0.14);
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+.proof-step-item.flawed {
+  border-color: #ff7675;
+  background: rgba(231, 76, 60, 0.2);
+}
+
+.proof-step-item.selected {
+  border-color: var(--gold);
+  background: rgba(255, 193, 7, 0.2);
+  box-shadow: 0 0 14px rgba(255, 193, 7, 0.3);
+}
+
+.proof-step-item.fixed {
+  border-color: #2ecc71;
+  background: rgba(46, 204, 113, 0.2);
+}
+
+.proof-step-text {
+  font-size: 1.06rem;
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+/* Option Buttons inside simulation */
+.sim-option-btn {
+  background: rgba(255, 255, 255, 0.09);
+  border: 1.5px solid rgba(255, 255, 255, 0.18);
+  border-radius: 14px;
+  padding: 12px 18px;
+  color: #ffffff;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.04rem;
+  line-height: 1.45;
+  text-align: left;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.sim-option-btn:hover {
+  background: rgba(254, 202, 87, 0.18);
+  border-color: var(--gold);
+  color: #fff;
+  transform: translateY(-1px);
+}
+
+.sim-option-btn.correct {
+  background: rgba(46, 204, 113, 0.28);
+  border-color: #2ecc71;
+  color: #86efac;
+}
+
+.sim-option-btn.wrong {
+  background: rgba(231, 76, 60, 0.28);
+  border-color: #e74c3c;
+  color: #ff7675;
+}
+
+@media (max-width: 860px) {
+  .station-grid-2col {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+}
