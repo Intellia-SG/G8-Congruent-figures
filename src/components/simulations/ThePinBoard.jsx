@@ -116,12 +116,14 @@ export default function ThePinBoard({ onComplete, _audioEnabled }) {
 
   return (
     <div className="station-container">
-      {/* Header */}
+      {/* Sleek Compact Header */}
       <div className="station-header">
-        <span className="station-badge">📌 Station A · Concept Discovery Lab</span>
-        <h2 className="station-title">The Pin Board</h2>
+        <div className="station-title-row">
+          <span className="station-badge">📌 Station A</span>
+          <h2 className="station-title">The Pin Board</h2>
+        </div>
         <p className="station-instruction">
-          Pin three parts onto the timber frame. Wiggle the free vertex to discover whether the frame is rigidly locked into exactly ONE triangle, or swings into multiple shapes!
+          Pin three parts onto the timber frame. Wiggle the free vertex to discover whether the frame is rigidly locked into ONE triangle, or swings into multiple shapes!
         </p>
       </div>
 
@@ -149,108 +151,83 @@ export default function ThePinBoard({ onComplete, _audioEnabled }) {
           {/* Left Column: Interactive Visual Canvas & Wiggle Slider */}
           <div className="station-col">
             <div className="station-canvas-card">
-              <svg viewBox="0 0 440 200" style={{ width: '100%', height: '210px', overflow: 'visible' }}>
-                {/* Background grid markings for drafting feel */}
-                <line x1="20" y1="160" x2="420" y2="160" stroke="rgba(255,255,255,0.18)" strokeWidth="1" strokeDasharray="4 4" />
+              <svg viewBox="0 0 400 155" style={{ width: '100%', height: '145px', overflow: 'visible' }}>
+                <line x1="20" y1="130" x2="380" y2="130" stroke="rgba(255,255,255,0.18)" strokeWidth="1" strokeDasharray="4 4" />
 
                 {isAmbiguous ? (
                   /* SSA Ambiguous Double Render with swinging arc */
                   <>
-                    {/* Fixed base line */}
-                    <line x1="50" y1="150" x2="380" y2="150" stroke="#718096" strokeWidth="2.5" strokeDasharray="5 5" />
-                    
-                    {/* Side b (AC) */}
-                    <line x1="50" y1="150" x2="210" y2="40" stroke="#38bdf8" strokeWidth="4" />
-                    <text x="110" y="85" fill="#38bdf8" fontSize="15" fontWeight="bold">Side b = 8 cm</text>
+                    <line x1="50" y1="125" x2="360" y2="125" stroke="#718096" strokeWidth="2" strokeDasharray="5 5" />
+                    <line x1="50" y1="125" x2="190" y2="35" stroke="#38bdf8" strokeWidth="3.5" />
+                    <text x="100" y="75" fill="#38bdf8" fontSize="13" fontWeight="bold">Side b = 8 cm</text>
 
-                    {/* Swinging Arm Arc (radius 110 from C) */}
                     <path
-                      d="M 130,150 A 110,110 0 0,0 310,150"
+                      d="M 120,125 A 95,95 0 0,0 280,125"
                       fill="none"
                       stroke="rgba(251, 191, 36, 0.65)"
-                      strokeWidth="2.5"
-                      strokeDasharray="5 5"
+                      strokeWidth="2"
+                      strokeDasharray="4 4"
                     />
 
-                    {/* Position 1: Acute Triangle B1 */}
-                    <line x1="210" y1="40" x2="310" y2="150" stroke="#22c55e" strokeWidth="4" />
-                    <line x1="50" y1="150" x2="310" y2="150" stroke="#22c55e" strokeWidth="3" />
+                    <line x1="190" y1="35" x2="280" y2="125" stroke="#22c55e" strokeWidth="3.5" />
+                    <line x1="50" y1="125" x2="280" y2="125" stroke="#22c55e" strokeWidth="2.5" />
 
-                    {/* Position 2: Obtuse Triangle B2 */}
-                    <line x1="210" y1="40" x2="130" y2="150" stroke="#ef4444" strokeWidth="4" strokeDasharray="6 4" />
-                    <line x1="50" y1="150" x2="130" y2="150" stroke="#ef4444" strokeWidth="3" strokeDasharray="6 4" />
+                    <line x1="190" y1="35" x2="120" y2="125" stroke="#ef4444" strokeWidth="3.5" strokeDasharray="5 4" />
+                    <line x1="50" y1="125" x2="120" y2="125" stroke="#ef4444" strokeWidth="2.5" strokeDasharray="5 4" />
 
-                    {/* Vertex Pins */}
-                    <circle cx="50" cy="150" r="7" fill="#f59e0b" />
-                    <circle cx="210" cy="40" r="7" fill="#38bdf8" />
-                    <circle cx="310" cy="150" r="7" fill="#22c55e" />
-                    <circle cx="130" cy="150" r="7" fill="#ef4444" />
+                    <circle cx="50" cy="125" r="6" fill="#f59e0b" />
+                    <circle cx="190" cy="35" r="6" fill="#38bdf8" />
+                    <circle cx="280" cy="125" r="6" fill="#22c55e" />
+                    <circle cx="120" cy="125" r="6" fill="#ef4444" />
 
-                    {/* Labels */}
-                    <text x="35" y="174" fill="#f59e0b" fontSize="16" fontWeight="bold">A (30° pinned)</text>
-                    <text x="210" y="26" fill="#fff" fontSize="17" fontWeight="bold">C</text>
-                    <text x="305" y="174" fill="#22c55e" fontSize="15" fontWeight="bold">B₁ (Acute Flat)</text>
-                    <text x="95" y="174" fill="#ef4444" fontSize="15" fontWeight="bold">B₂ (Obtuse Flat)</text>
-                    <text x="225" y="105" fill="#f59e0b" fontSize="14" fontWeight="bold">Swinging Arm (6 cm)</text>
+                    <text x="35" y="146" fill="#f59e0b" fontSize="14" fontWeight="bold">A (30°)</text>
+                    <text x="190" y="24" fill="#fff" fontSize="15" fontWeight="bold">C</text>
+                    <text x="275" y="146" fill="#22c55e" fontSize="13" fontWeight="bold">B₁ (Acute)</text>
+                    <text x="90" y="146" fill="#ef4444" fontSize="13" fontWeight="bold">B₂ (Obtuse)</text>
+                    <text x="205" y="90" fill="#f59e0b" fontSize="13" fontWeight="bold">Swinging Arm (6 cm)</text>
                   </>
                 ) : isScaleOnly ? (
                   /* AAA Similarity Scale Render */
                   <>
-                    {/* Small Flat */}
-                    <polygon points="50,150 115,55 170,150" fill="rgba(56, 189, 248, 0.2)" stroke="#38bdf8" strokeWidth="3.5" />
-                    <circle cx="50" cy="150" r="6" fill="#38bdf8" />
-                    <circle cx="115" cy="55" r="6" fill="#38bdf8" />
-                    <circle cx="170" cy="150" r="6" fill="#38bdf8" />
-                    <text x="50" y="175" fill="#38bdf8" fontSize="15" fontWeight="bold">Small Flat (Scale 1.0)</text>
+                    <polygon points="50,125 105,45 150,125" fill="rgba(56, 189, 248, 0.2)" stroke="#38bdf8" strokeWidth="3" />
+                    <circle cx="50" cy="125" r="5" fill="#38bdf8" />
+                    <circle cx="105" cy="45" r="5" fill="#38bdf8" />
+                    <circle cx="150" cy="125" r="5" fill="#38bdf8" />
+                    <text x="50" y="145" fill="#38bdf8" fontSize="13" fontWeight="bold">Small Flat (1x)</text>
 
-                    {/* Large Flat */}
-                    <polygon points="230,150 330,20 410,150" fill="rgba(251, 191, 36, 0.2)" stroke="#fbbf24" strokeWidth="3.5" />
-                    <circle cx="230" cy="150" r="6" fill="#fbbf24" />
-                    <circle cx="330" cy="20" r="6" fill="#fbbf24" />
-                    <circle cx="410" cy="150" r="6" fill="#fbbf24" />
-                    <text x="250" y="175" fill="#fbbf24" fontSize="15" fontWeight="bold">Large Flat (Scale 1.6)</text>
-
-                    <text x="140" y="194" fill="#e2e8f0" fontSize="14" fontWeight="bold">
-                      Angles match (45°, 60°, 75°), but sizes differ! Not Congruent.
-                    </text>
+                    <polygon points="210,125 295,20 365,125" fill="rgba(251, 191, 36, 0.2)" stroke="#fbbf24" strokeWidth="3" />
+                    <circle cx="210" cy="125" r="5" fill="#fbbf24" />
+                    <circle cx="295" cy="20" r="5" fill="#fbbf24" />
+                    <circle cx="365" cy="125" r="5" fill="#fbbf24" />
+                    <text x="235" y="145" fill="#fbbf24" fontSize="13" fontWeight="bold">Large Flat (1.6x)</text>
                   </>
                 ) : (
                   /* Rigid Locked Test Render */
                   <>
-                    {/* Triangle body */}
                     <polygon
-                      points={`60,150 ${190 + wiggle},40 340,150`}
+                      points={`60,125 ${180 + wiggle},30 310,125`}
                       fill="rgba(34, 197, 94, 0.22)"
                       stroke="#22c55e"
-                      strokeWidth="4"
+                      strokeWidth="3.5"
                     />
 
-                    {/* RHS Right Angle Marker */}
                     {selectedTrio.id === 'rhs' && (
-                      <path d="M 60,130 L 80,130 L 80,150" fill="none" stroke="#fbbf24" strokeWidth="2.5" />
+                      <path d="M 60,105 L 80,105 L 80,125" fill="none" stroke="#fbbf24" strokeWidth="2.5" />
                     )}
 
-                    {/* Angle arc at vertex A */}
                     {(selectedTrio.id === 'sas' || selectedTrio.id === 'asa' || selectedTrio.id === 'aas') && (
-                      <path d="M 90,150 A 30,30 0 0,0 80,132" fill="none" stroke="#fbbf24" strokeWidth="3" />
+                      <path d="M 85,125 A 25,25 0 0,0 78,110" fill="none" stroke="#fbbf24" strokeWidth="2.5" />
                     )}
 
-                    {/* Side hash tick marks */}
-                    <line x1="120" y1="92" x2="130" y2="98" stroke="#38bdf8" strokeWidth="3" />
-                    <line x1="260" y1="92" x2="270" y2="98" stroke="#38bdf8" strokeWidth="3" />
+                    <circle cx="60" cy="125" r="6" fill="#f59e0b" />
+                    <circle cx={180 + wiggle} cy="30" r="6" fill="#22c55e" />
+                    <circle cx="310" cy="125" r="6" fill="#f59e0b" />
 
-                    {/* Vertices */}
-                    <circle cx="60" cy="150" r="7" fill="#f59e0b" />
-                    <circle cx={190 + wiggle} cy="40" r="7" fill="#22c55e" />
-                    <circle cx="340" cy="150" r="7" fill="#f59e0b" />
+                    <text x="45" y="146" fill="#fff" fontSize="14" fontWeight="bold">A</text>
+                    <text x={165 + wiggle} y="18" fill="#22c55e" fontSize="14" fontWeight="bold">Locked Vertex C</text>
+                    <text x="315" y="146" fill="#fff" fontSize="14" fontWeight="bold">B</text>
 
-                    {/* Vertex Labels */}
-                    <text x="45" y="174" fill="#fff" fontSize="16" fontWeight="bold">A</text>
-                    <text x={175 + wiggle} y="26" fill="#22c55e" fontSize="16" fontWeight="bold">Locked Vertex C</text>
-                    <text x="345" y="174" fill="#fff" fontSize="16" fontWeight="bold">B</text>
-
-                    {/* Status watermark */}
-                    <text x="140" y="110" fill="rgba(34, 197, 94, 0.85)" fontSize="15" fontWeight="bold">
+                    <text x="135" y="90" fill="rgba(34, 197, 94, 0.85)" fontSize="13" fontWeight="bold">
                       🔒 RIGID FRAME LOCKED
                     </text>
                   </>
@@ -260,8 +237,8 @@ export default function ThePinBoard({ onComplete, _audioEnabled }) {
 
             {/* Wiggle Slider (for locked test) */}
             {isTest && (
-              <div style={{ width: '100%', display: 'flex', alignItems: 'center', gap: '14px', background: 'rgba(255,255,255,0.06)', padding: '10px 18px', borderRadius: '14px', boxSizing: 'border-box' }}>
-                <span style={{ fontSize: '1.08rem', fontWeight: 800, color: '#ffffff', whiteSpace: 'nowrap' }}>
+              <div style={{ width: '100%', display: 'flex', alignItems: 'center', gap: '10px', background: 'rgba(255,255,255,0.06)', padding: '6px 12px', borderRadius: '10px', boxSizing: 'border-box' }}>
+                <span style={{ fontSize: '0.94rem', fontWeight: 800, color: '#ffffff', whiteSpace: 'nowrap' }}>
                   Wiggle frame:
                 </span>
                 <input
@@ -270,72 +247,61 @@ export default function ThePinBoard({ onComplete, _audioEnabled }) {
                   max="15"
                   value={wiggle}
                   onChange={e => setWiggle(Number(e.target.value))}
-                  style={{ flex: 1, accentColor: 'var(--gold)', height: '10px', cursor: 'pointer' }}
+                  style={{ flex: 1, accentColor: 'var(--gold)', height: '8px', cursor: 'pointer' }}
                   aria-label="Wiggle vertex slider"
                 />
-                <span style={{ fontSize: '1rem', fontWeight: 900, color: 'var(--gold)', minWidth: '45px', textAlign: 'right' }}>
+                <span style={{ fontSize: '0.92rem', fontWeight: 900, color: 'var(--gold)', minWidth: '40px', textAlign: 'right' }}>
                   {wiggle > 0 ? `+${wiggle}°` : `${wiggle}°`}
                 </span>
               </div>
             )}
 
-            {/* Explored Progress Bar & Mini Tracker */}
-            <div className="station-info-card" style={{ padding: '12px 18px' }}>
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                <span style={{ fontSize: '1.05rem', fontWeight: 900, color: 'var(--gold)' }}>
-                  Discovery Checklist ({explored.size}/7 Explored)
-                </span>
-                <span style={{ fontSize: '0.92rem', color: '#86efac', fontWeight: 800 }}>
-                  {canShowConfirmation ? "✓ Ready to Certify" : "Explore 2 tests + SSA + AAA"}
-                </span>
-              </div>
-              <div className="criterion-mini-grid">
-                {PIN_TRIOS.map(p => (
-                  <button
-                    key={p.id}
-                    type="button"
-                    className={`criterion-mini-pill ${selectedTrio.id === p.id ? 'active' : ''} ${explored.has(p.id) ? 'tested' : ''}`}
-                    onClick={() => handleSelectTrio(p)}
-                  >
-                    <span>{p.id.toUpperCase()}</span>
-                    <span>{explored.has(p.id) ? (p.isTest ? '🔒' : '⚠️') : '○'}</span>
-                  </button>
-                ))}
-              </div>
+            {/* Progress Badge */}
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', background: 'rgba(255,255,255,0.05)', padding: '6px 12px', borderRadius: '10px' }}>
+              <span style={{ fontSize: '0.92rem', fontWeight: 800, color: 'var(--gold)' }}>
+                Explored: {explored.size}/7 combinations
+              </span>
+              <span style={{ fontSize: '0.85rem', color: canShowConfirmation ? '#86efac' : 'rgba(255,255,255,0.7)', fontWeight: 700 }}>
+                {canShowConfirmation ? "✓ Ready to Certify" : "Need 2 tests + SSA + AAA"}
+              </span>
             </div>
           </div>
 
-          {/* Right Column: Feedback, Deep Dive Explanation, Confirmation or Success */}
+          {/* Right Column: Progressive display (Feedback + Rule or Question or Success) */}
           <div className="station-col">
             {/* Live Feedback Status Banner */}
             <div className={`station-feedback-box ${isTest ? 'test' : isAmbiguous ? 'ambiguous' : 'info'}`}>
               {isTest ? (
-                <>🔒 <strong>LOCKED (Valid Congruence Test):</strong> Only ONE triangle can possibly be formed! Every stage flat built with {selectedTrio.id.toUpperCase()} will be an identical match.</>
+                <>🔒 <strong>LOCKED (Valid Test):</strong> Only ONE triangle can possibly be formed! Every copy built with {selectedTrio.id.toUpperCase()} will match identically.</>
               ) : isAmbiguous ? (
-                <>⚠️ <strong>AMBIGUOUS TRAP (NOT a Congruence Test):</strong> Two completely different triangles can be formed with these identical measurements! SSA cannot guarantee a match.</>
+                <>⚠️ <strong>AMBIGUOUS TRAP (Not a Test):</strong> Two different triangles can be formed with these identical measurements! SSA cannot guarantee a match.</>
               ) : (
-                <>📐 <strong>SIMILARITY ONLY (NOT a Congruence Test):</strong> AAA fixes the angles and shape, but side lengths can scale up or down indefinitely like a projector.</>
+                <>📐 <strong>SIMILARITY ONLY:</strong> AAA fixes the angles, but side lengths can scale up or down indefinitely like a projector.</>
               )}
             </div>
 
-            {/* Geometric Rule & Backstage Application Card */}
-            <div className="station-info-card">
-              <div className="station-info-title">
-                <span>📘</span> {selectedTrio.ruleTitle}
+            {/* When Completed: Success Card */}
+            {completed ? (
+              <div className="station-success-card">
+                <div className="station-success-icon">🎟️</div>
+                <div className="station-success-title">The Pin Board Mastered!</div>
+                <p className="station-success-desc">
+                  You've mathematically verified why SSS, SAS, ASA, AAS, and RHS lock a triangle, while SSA swings ambiguously and AAA allows infinite scaling!
+                </p>
+                <button
+                  type="button"
+                  className="btn btn-primary"
+                  onClick={onComplete}
+                  style={{ padding: '8px 24px', fontSize: '1.05rem', fontWeight: 900 }}
+                >
+                  Complete Station A ✓
+                </button>
               </div>
-              <p className="station-info-body">
-                {selectedTrio.ruleText}
-              </p>
-              <div style={{ marginTop: '4px', padding: '8px 12px', background: 'rgba(255, 193, 7, 0.1)', borderRadius: '10px', borderLeft: '3px solid var(--gold)', fontSize: '0.96rem', color: '#fef08a', fontWeight: 600 }}>
-                🎭 {selectedTrio.stageMetaphor}
-              </div>
-            </div>
-
-            {/* Confirmation Question Gate */}
-            {canShowConfirmation && !completed && (
+            ) : canShowConfirmation ? (
+              /* When Ready: Confirmation Question Gate */
               <div className="confirm-question-card">
                 <span className="confirm-question-title">
-                  🧠 Backstage Discovery Certification: Why can the SSA frame take two different shapes?
+                  🧠 Backstage Certification: Why can the SSA frame take two different shapes?
                 </span>
                 {[
                   "The non-included side swings in a circular arc, intersecting the baseline at two points (one acute, one obtuse)",
@@ -352,24 +318,18 @@ export default function ThePinBoard({ onComplete, _audioEnabled }) {
                   </button>
                 ))}
               </div>
-            )}
-
-            {/* Success Completion Panel */}
-            {completed && (
-              <div className="station-success-card">
-                <div className="station-success-icon">🎟️</div>
-                <div className="station-success-title">The Pin Board Mastered!</div>
-                <p className="station-success-desc">
-                  You've mathematically verified why SSS, SAS, ASA, AAS, and RHS rigidly lock a triangle, while SSA swings ambiguously and AAA allows infinite scaling!
+            ) : (
+              /* Normal Exploration: Geometric Rule Card */
+              <div className="station-info-card">
+                <div className="station-info-title">
+                  <span>📘</span> {selectedTrio.ruleTitle}
+                </div>
+                <p className="station-info-body">
+                  {selectedTrio.ruleText}
                 </p>
-                <button
-                  type="button"
-                  className="btn btn-primary"
-                  onClick={onComplete}
-                  style={{ padding: '12px 32px', fontSize: '1.15rem', fontWeight: 900 }}
-                >
-                  Complete Station A ✓
-                </button>
+                <div style={{ marginTop: '2px', padding: '6px 10px', background: 'rgba(255, 193, 7, 0.1)', borderRadius: '8px', borderLeft: '3px solid var(--gold)', fontSize: '0.9rem', color: '#fef08a', fontWeight: 600 }}>
+                  🎭 {selectedTrio.stageMetaphor}
+                </div>
               </div>
             )}
           </div>

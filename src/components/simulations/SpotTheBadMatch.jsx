@@ -98,10 +98,12 @@ export default function SpotTheBadMatch({ onComplete, _audioEnabled }) {
 
   return (
     <div className="station-container">
-      {/* Header */}
+      {/* Sleek Compact Header */}
       <div className="station-header">
-        <span className="station-badge">🔍 Station D · Error-Detective</span>
-        <h2 className="station-title">Spot the Bad Match</h2>
+        <div className="station-title-row">
+          <span className="station-badge">🔍 Station D · Error-Detective</span>
+          <h2 className="station-title">Spot the Bad Match</h2>
+        </div>
         <p className="station-instruction">
           A backstage crew member's proof contains an insidious geometric flaw. Tap the flawed step, then select the watertight fix to save opening night!
         </p>
@@ -113,14 +115,14 @@ export default function SpotTheBadMatch({ onComplete, _audioEnabled }) {
           <div className="station-col">
             <div className="station-info-card">
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                <span style={{ fontWeight: 900, color: 'var(--gold)', fontSize: '1.25rem' }}>
+                <span style={{ fontWeight: 900, color: 'var(--gold)', fontSize: '1.15rem' }}>
                   {currentCase.title}
                 </span>
-                <span style={{ fontSize: '0.96rem', background: 'rgba(255,255,255,0.1)', padding: '5px 12px', borderRadius: '10px', fontWeight: 800 }}>
+                <span style={{ fontSize: '0.88rem', background: 'rgba(255,255,255,0.1)', padding: '3px 10px', borderRadius: '8px', fontWeight: 800 }}>
                   Case: <strong style={{ color: '#2ecc71' }}>{completedCases}/{CASES.length} Solved</strong>
                 </span>
               </div>
-              <p style={{ fontSize: '1.05rem', color: 'rgba(255,255,255,0.92)', margin: '4px 0 0', fontWeight: 600, lineHeight: 1.45 }}>
+              <p style={{ fontSize: '0.94rem', color: 'rgba(255,255,255,0.92)', margin: '4px 0 0', fontWeight: 600, lineHeight: 1.4 }}>
                 {currentCase.premise}
               </p>
             </div>
@@ -139,7 +141,7 @@ export default function SpotTheBadMatch({ onComplete, _audioEnabled }) {
                     aria-label={`Step ${i + 1}: ${st.text}`}
                   >
                     <span className="proof-step-text">{st.text}</span>
-                    <span style={{ fontSize: '0.92rem', color: isSelected ? 'var(--gold)' : 'rgba(255,255,255,0.7)', whiteSpace: 'nowrap', marginLeft: '10px', fontWeight: 800 }}>
+                    <span style={{ fontSize: '0.85rem', color: isSelected ? 'var(--gold)' : 'rgba(255,255,255,0.7)', whiteSpace: 'nowrap', marginLeft: '8px', fontWeight: 800 }}>
                       {isSelected ? "👉 Selected" : "Inspect Step"}
                     </span>
                   </div>
@@ -148,23 +150,41 @@ export default function SpotTheBadMatch({ onComplete, _audioEnabled }) {
             </div>
           </div>
 
-          {/* Right Column: Detective's Handbook OR Fix Options & Feedback */}
+          {/* Right Column: Detective's Handbook OR Fix Options OR Success Gate */}
           <div className="station-col">
-            {selectedStepIdx !== null ? (
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', width: '100%' }}>
+            {completed ? (
+              <div className="station-success-card">
+                <div className="station-success-icon">🕵️</div>
+                <div className="station-success-title">Lead Detective Certified!</div>
+                <p className="station-success-desc">
+                  You've exposed the classic traps: ambiguous SSA swings and premature CPCTC deductions! The production is saved!
+                </p>
+                <button
+                  type="button"
+                  className="btn btn-primary"
+                  onClick={onComplete}
+                  style={{ padding: '8px 28px', fontSize: '1.08rem', fontWeight: 900 }}
+                >
+                  Complete Station D ✓
+                </button>
+              </div>
+            ) : selectedStepIdx !== null ? (
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', width: '100%' }}>
                 <div className="station-info-card">
-                  <span style={{ fontSize: '1.18rem', fontWeight: 900, color: 'var(--gold)' }}>
-                    Diagnosing Step {selectedStepIdx + 1}:
-                  </span>
-                  <div style={{ fontSize: '1.02rem', color: '#fff', fontStyle: 'italic', padding: '6px 10px', background: 'rgba(255,255,255,0.06)', borderRadius: '8px' }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                    <span style={{ fontSize: '1.05rem', fontWeight: 900, color: 'var(--gold)' }}>
+                      Diagnosing Step {selectedStepIdx + 1}:
+                    </span>
+                  </div>
+                  <div style={{ fontSize: '0.92rem', color: '#fff', fontStyle: 'italic', padding: '4px 8px', background: 'rgba(255,255,255,0.06)', borderRadius: '6px', margin: '4px 0' }}>
                     "{currentCase.steps[selectedStepIdx].text}"
                   </div>
-                  <span style={{ fontSize: '1.05rem', fontWeight: 800, color: '#fef08a', marginTop: '4px' }}>
-                    Choose the Watertight Fix to Save the Production:
+                  <span style={{ fontSize: '0.92rem', fontWeight: 800, color: '#fef08a' }}>
+                    Choose the Watertight Fix:
                   </span>
                 </div>
 
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
                   {currentCase.fixOptions.map((opt, fixIdx) => {
                     const isFixSel = selectedFixIdx === fixIdx;
                     return (
@@ -179,83 +199,64 @@ export default function SpotTheBadMatch({ onComplete, _audioEnabled }) {
                     );
                   })}
                 </div>
+
+                {/* Feedback Box */}
+                {feedback && (
+                  <div className={`station-feedback-box ${feedback.valid ? 'test' : 'ambiguous'}`} style={{ padding: '6px 10px', fontSize: '0.88rem' }}>
+                    {feedback.message}
+                  </div>
+                )}
+
+                {/* Next Case Button */}
+                {feedback?.valid && completedCases < CASES.length && (
+                  <button
+                    type="button"
+                    className="btn btn-outline"
+                    onClick={handleNextCase}
+                    style={{ padding: '6px 18px', fontSize: '0.98rem', width: '100%', fontWeight: 800, minHeight: '34px' }}
+                  >
+                    Next Detective Case ➔
+                  </button>
+                )}
               </div>
             ) : (
-              /* Detective Handbook Guide Fills Whitespace Beautifully */
+              /* Detective Handbook Guide Fills Space Elegantly without Overflow */
               <div className="station-info-card">
                 <div className="station-info-title">
                   <span>🕵️</span> Detective's Field Guide: 3 Backstage Fallacies
                 </div>
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', marginTop: '4px' }}>
-                  <div style={{ padding: '8px 12px', background: 'rgba(231, 76, 60, 0.15)', borderRadius: '10px', borderLeft: '3px solid #ff7675' }}>
-                    <div style={{ fontWeight: 800, color: '#ff7675', fontSize: '1.02rem' }}>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '6px', marginTop: '4px' }}>
+                  <div style={{ padding: '6px 10px', background: 'rgba(231, 76, 60, 0.15)', borderRadius: '8px', borderLeft: '3px solid #ff7675' }}>
+                    <div style={{ fontWeight: 800, color: '#ff7675', fontSize: '0.95rem' }}>
                       ⚠️ Fallacy 1: The SSA Swing Trap
                     </div>
-                    <div style={{ fontSize: '0.94rem', color: 'rgba(255,255,255,0.85)', marginTop: '2px' }}>
-                      Two sides and a non-included angle can swing into two distinct shapes (one acute, one obtuse). It cannot prove congruence!
+                    <div style={{ fontSize: '0.88rem', color: 'rgba(255,255,255,0.85)', marginTop: '2px' }}>
+                      Two sides and non-included angle can swing into acute or obtuse triangles. Never proves congruence!
                     </div>
                   </div>
 
-                  <div style={{ padding: '8px 12px', background: 'rgba(241, 196, 15, 0.15)', borderRadius: '10px', borderLeft: '3px solid #f1c40f' }}>
-                    <div style={{ fontWeight: 800, color: '#f1c40f', fontSize: '1.02rem' }}>
+                  <div style={{ padding: '6px 10px', background: 'rgba(241, 196, 15, 0.15)', borderRadius: '8px', borderLeft: '3px solid #f1c40f' }}>
+                    <div style={{ fontWeight: 800, color: '#f1c40f', fontSize: '0.95rem' }}>
                       ⚠️ Fallacy 2: Premature CPCTC Deduction
                     </div>
-                    <div style={{ fontSize: '0.94rem', color: 'rgba(255,255,255,0.85)', marginTop: '2px' }}>
-                      Circular reasoning: You cannot claim "Hence, corresponding parts are equal" before the triangles have been proven congruent!
+                    <div style={{ fontSize: '0.88rem', color: 'rgba(255,255,255,0.85)', marginTop: '2px' }}>
+                      Circular reasoning: You cannot claim "Hence, parts are equal" before congruence is proven!
                     </div>
                   </div>
 
-                  <div style={{ padding: '8px 12px', background: 'rgba(52, 152, 219, 0.15)', borderRadius: '10px', borderLeft: '3px solid #3498db' }}>
-                    <div style={{ fontWeight: 800, color: '#74b9ff', fontSize: '1.02rem' }}>
+                  <div style={{ padding: '6px 10px', background: 'rgba(52, 152, 219, 0.15)', borderRadius: '8px', borderLeft: '3px solid #3498db' }}>
+                    <div style={{ fontWeight: 800, color: '#74b9ff', fontSize: '0.95rem' }}>
                       ⚠️ Fallacy 3: The AAA Illusion
                     </div>
-                    <div style={{ fontSize: '0.94rem', color: 'rgba(255,255,255,0.85)', marginTop: '2px' }}>
-                      Three equal angles only prove the triangles share the same shape (Similarity), not the same size (Congruence)!
+                    <div style={{ fontSize: '0.88rem', color: 'rgba(255,255,255,0.85)', marginTop: '2px' }}>
+                      Three equal angles only guarantee similarity (same shape), NOT congruence (same size)!
                     </div>
                   </div>
 
-                  <div style={{ textAlign: 'center', padding: '10px', color: 'var(--gold)', fontWeight: 800, fontSize: '1.02rem' }}>
+                  <div style={{ textAlign: 'center', padding: '6px', color: 'var(--gold)', fontWeight: 800, fontSize: '0.92rem' }}>
                     👈 Tap any step in the proof on the left to inspect and fix it!
                   </div>
                 </div>
-              </div>
-            )}
-
-            {/* Feedback Box */}
-            {feedback && (
-              <div className={`station-feedback-box ${feedback.valid ? 'test' : 'ambiguous'}`}>
-                {feedback.message}
-              </div>
-            )}
-
-            {/* Next Case Button */}
-            {feedback?.valid && completedCases < CASES.length && (
-              <button
-                type="button"
-                className="btn btn-outline"
-                onClick={handleNextCase}
-                style={{ padding: '12px 24px', fontSize: '1.12rem', width: '100%', fontWeight: 800 }}
-              >
-                Next Detective Case ➔
-              </button>
-            )}
-
-            {/* Success Gate */}
-            {completed && (
-              <div className="station-success-card">
-                <div className="station-success-icon">🕵️</div>
-                <div className="station-success-title">Lead Detective Certified!</div>
-                <p className="station-success-desc">
-                  You've exposed the classic traps: ambiguous SSA swings and premature CPCTC deductions! The production is saved!
-                </p>
-                <button
-                  type="button"
-                  className="btn btn-primary"
-                  onClick={onComplete}
-                  style={{ padding: '12px 32px', fontSize: '1.15rem', fontWeight: 900 }}
-                >
-                  Complete Station D ✓
-                </button>
               </div>
             )}
           </div>

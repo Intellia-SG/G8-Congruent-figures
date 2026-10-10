@@ -81,12 +81,14 @@ export default function TheFullRehearsal({ onComplete, _audioEnabled }) {
 
   return (
     <div className="station-container">
-      {/* Header */}
+      {/* Sleek Compact Header */}
       <div className="station-header">
-        <span className="station-badge">🎭 Station C · Multi-Step Construction</span>
-        <h2 className="station-title">The Full Rehearsal</h2>
+        <div className="station-title-row">
+          <span className="station-badge">🎭 Station C</span>
+          <h2 className="station-title">The Full Rehearsal</h2>
+        </div>
         <p className="station-instruction">
-          Construct an end-to-end geometric proof for opening night! Separate the overlapping set pieces, uncover the hidden shared beam, choose the test, and arrange the proof chain.
+          Construct an end-to-end geometric proof: uncover the hidden beam, choose the test, and arrange the proof chain!
         </p>
       </div>
 
@@ -95,79 +97,76 @@ export default function TheFullRehearsal({ onComplete, _audioEnabled }) {
           {/* Left Column: Overlapping Set Diagram & Clues Panel */}
           <div className="station-col">
             <div style={{ display: 'flex', justifyContent: 'space-between', width: '100%', alignItems: 'center' }}>
-              <span style={{ fontWeight: 900, color: 'var(--gold)', fontSize: '1.2rem' }}>
+              <span style={{ fontWeight: 900, color: 'var(--gold)', fontSize: '1.15rem' }}>
                 Stage Flat: Quadrilateral ABCD
               </span>
               <button
                 type="button"
                 className="btn btn-outline"
                 onClick={() => setIsSeparated(!isSeparated)}
-                style={{ padding: '6px 16px', fontSize: '0.98rem', fontWeight: 800 }}
+                style={{ padding: '4px 12px', fontSize: '0.9rem', fontWeight: 800 }}
               >
-                {isSeparated ? "🔗 Combine Set" : "✂️ Separate Triangles"}
+                {isSeparated ? "🔗 Combine" : "✂️ Separate"}
               </button>
             </div>
 
             {/* Stage Flat Diagram Canvas */}
             <div className="station-canvas-card">
               {!isSeparated ? (
-                <svg viewBox="0 0 440 180" style={{ width: '100%', height: '185px' }}>
-                  {/* Quadrilateral body */}
-                  <polygon points="60,145 150,35 340,35 250,145" fill="rgba(124, 92, 191, 0.25)" stroke="#a78bfa" strokeWidth="3.5" />
+                <svg viewBox="0 0 380 140" style={{ width: '100%', height: '135px' }}>
+                  <polygon points="50,115 130,25 300,25 220,115" fill="rgba(124, 92, 191, 0.25)" stroke="#a78bfa" strokeWidth="3" />
                   
                   {/* Shared Diagonal Beam BD */}
                   <line
-                    x1="150" y1="35" x2="250" y2="145"
+                    x1="130" y1="25" x2="220" y2="115"
                     stroke={commonSideMarked ? "#22c55e" : "#fbbf24"}
-                    strokeWidth={commonSideMarked ? "5" : "3"}
+                    strokeWidth={commonSideMarked ? "4" : "2.5"}
                     strokeDasharray={commonSideMarked ? "0" : "5 5"}
                   />
 
                   {/* Hash marks on AB and CD */}
-                  <line x1="98" y1="84" x2="108" y2="92" stroke="#38bdf8" strokeWidth="3" />
-                  <line x1="288" y1="84" x2="298" y2="92" stroke="#38bdf8" strokeWidth="3" />
+                  <line x1="85" y1="65" x2="95" y2="73" stroke="#38bdf8" strokeWidth="2.5" />
+                  <line x1="255" y1="65" x2="265" y2="73" stroke="#38bdf8" strokeWidth="2.5" />
 
                   {/* Double Hash marks on AD and CB */}
-                  <line x1="145" y1="140" x2="151" y2="150" stroke="#f472b6" strokeWidth="3" />
-                  <line x1="153" y1="140" x2="159" y2="150" stroke="#f472b6" strokeWidth="3" />
-                  <line x1="235" y1="30" x2="241" y2="40" stroke="#f472b6" strokeWidth="3" />
-                  <line x1="243" y1="30" x2="249" y2="40" stroke="#f472b6" strokeWidth="3" />
+                  <line x1="130" y1="110" x2="136" y2="120" stroke="#f472b6" strokeWidth="2.5" />
+                  <line x1="138" y1="110" x2="144" y2="120" stroke="#f472b6" strokeWidth="2.5" />
+                  <line x1="210" y1="20" x2="216" y2="30" stroke="#f472b6" strokeWidth="2.5" />
+                  <line x1="218" y1="20" x2="224" y2="30" stroke="#f472b6" strokeWidth="2.5" />
 
-                  {/* Vertices */}
-                  <circle cx="60" cy="145" r="6" fill="#fff" />
-                  <circle cx="150" cy="35" r="6" fill="#fff" />
-                  <circle cx="340" cy="35" r="6" fill="#fff" />
-                  <circle cx="250" cy="145" r="6" fill="#fff" />
+                  <circle cx="50" cy="115" r="5" fill="#fff" />
+                  <circle cx="130" cy="25" r="5" fill="#fff" />
+                  <circle cx="300" cy="25" r="5" fill="#fff" />
+                  <circle cx="220" cy="115" r="5" fill="#fff" />
 
-                  {/* Vertex Labels */}
-                  <text x="40" y="155" fill="#fff" fontSize="16" fontWeight="bold">A</text>
-                  <text x="145" y="24" fill="#fff" fontSize="16" fontWeight="bold">B</text>
-                  <text x="350" y="32" fill="#fff" fontSize="16" fontWeight="bold">C</text>
-                  <text x="255" y="160" fill="#fff" fontSize="16" fontWeight="bold">D</text>
+                  <text x="35" y="125" fill="#fff" fontSize="14" fontWeight="bold">A</text>
+                  <text x="125" y="18" fill="#fff" fontSize="14" fontWeight="bold">B</text>
+                  <text x="310" y="24" fill="#fff" fontSize="14" fontWeight="bold">C</text>
+                  <text x="225" y="128" fill="#fff" fontSize="14" fontWeight="bold">D</text>
 
                   {commonSideMarked && (
-                    <text x="175" y="95" fill="#22c55e" fontSize="14" fontWeight="bold" transform="rotate(45, 175, 95)">
+                    <text x="150" y="75" fill="#22c55e" fontSize="13" fontWeight="bold" transform="rotate(45, 150, 75)">
                       Common Beam BD ✓
                     </text>
                   )}
                 </svg>
               ) : (
-                <svg viewBox="0 0 440 180" style={{ width: '100%', height: '185px' }}>
+                <svg viewBox="0 0 380 140" style={{ width: '100%', height: '135px' }}>
                   {/* Left Triangle ABD */}
-                  <polygon points="45,145 115,35 185,145" fill="rgba(231, 111, 81, 0.3)" stroke="#f97316" strokeWidth="3.5" />
-                  <text x="30" y="155" fill="#fff" fontSize="15" fontWeight="bold">A</text>
-                  <text x="110" y="24" fill="#fff" fontSize="15" fontWeight="bold">B</text>
-                  <text x="190" y="155" fill="#fff" fontSize="15" fontWeight="bold">D</text>
-                  <line x1="115" y1="35" x2="185" y2="145" stroke="#22c55e" strokeWidth="4.5" />
-                  <text x="155" y="90" fill="#22c55e" fontSize="13" fontWeight="bold">BD</text>
+                  <polygon points="40,115 100,25 160,115" fill="rgba(231, 111, 81, 0.3)" stroke="#f97316" strokeWidth="3" />
+                  <text x="25" y="125" fill="#fff" fontSize="13" fontWeight="bold">A</text>
+                  <text x="95" y="18" fill="#fff" fontSize="13" fontWeight="bold">B</text>
+                  <text x="165" y="125" fill="#fff" fontSize="13" fontWeight="bold">D</text>
+                  <line x1="100" y1="25" x2="160" y2="115" stroke="#22c55e" strokeWidth="3.5" />
+                  <text x="135" y="70" fill="#22c55e" fontSize="12" fontWeight="bold">BD</text>
 
-                  {/* Right Triangle CDB (flipped to reveal congruence) */}
-                  <polygon points="255,35 325,145 395,35" fill="rgba(42, 157, 143, 0.3)" stroke="#14b8a6" strokeWidth="3.5" />
-                  <text x="240" y="30" fill="#fff" fontSize="15" fontWeight="bold">D</text>
-                  <text x="320" y="165" fill="#fff" fontSize="15" fontWeight="bold">B</text>
-                  <text x="400" y="30" fill="#fff" fontSize="15" fontWeight="bold">C</text>
-                  <line x1="255" y1="35" x2="325" y2="145" stroke="#22c55e" strokeWidth="4.5" />
-                  <text x="275" y="95" fill="#22c55e" fontSize="13" fontWeight="bold">DB</text>
+                  {/* Right Triangle CDB */}
+                  <polygon points="220,25 280,115 340,25" fill="rgba(42, 157, 143, 0.3)" stroke="#14b8a6" strokeWidth="3" />
+                  <text x="205" y="22" fill="#fff" fontSize="13" fontWeight="bold">D</text>
+                  <text x="275" y="130" fill="#fff" fontSize="13" fontWeight="bold">B</text>
+                  <text x="345" y="22" fill="#fff" fontSize="13" fontWeight="bold">C</text>
+                  <line x1="220" y1="25" x2="280" y2="115" stroke="#22c55e" strokeWidth="3.5" />
+                  <text x="240" y="75" fill="#22c55e" fontSize="12" fontWeight="bold">DB</text>
                 </svg>
               )}
             </div>
@@ -177,28 +176,28 @@ export default function TheFullRehearsal({ onComplete, _audioEnabled }) {
               <div className="station-info-title">
                 <span>📐</span> Stage Clues & Hidden Matches
               </div>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
                 <button
                   type="button"
                   className={`pin-chip ${commonSideMarked ? 'active' : ''}`}
                   onClick={() => setCommonSideMarked(true)}
-                  style={{ width: '100%', justifyContent: 'center' }}
+                  style={{ width: '100%', justifyContent: 'center', minHeight: '32px', fontSize: '0.92rem' }}
                 >
                   {commonSideMarked ? "✓ Hidden Shared Beam (BD = BD) Identified" : "🔍 Uncover Hidden Shared Beam BD"}
                 </button>
 
-                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '8px' }}>
-                  <span style={{ fontSize: '1rem', fontWeight: 800, color: 'rgba(255,255,255,0.9)' }}>
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '6px' }}>
+                  <span style={{ fontSize: '0.92rem', fontWeight: 800, color: 'rgba(255,255,255,0.9)' }}>
                     Congruence Test:
                   </span>
-                  <div style={{ display: 'flex', gap: '6px' }}>
+                  <div style={{ display: 'flex', gap: '4px' }}>
                     {['SSS', 'SAS', 'ASA', 'AAS', 'RHS'].map(t => (
                       <button
                         key={t}
                         type="button"
                         className={`pin-chip ${selectedTest === t ? 'active' : ''}`}
                         onClick={() => setSelectedTest(t)}
-                        style={{ padding: '6px 14px', minHeight: '34px', fontSize: '0.94rem' }}
+                        style={{ padding: '4px 10px', minHeight: '30px', fontSize: '0.88rem' }}
                       >
                         {t}
                       </button>
@@ -210,7 +209,7 @@ export default function TheFullRehearsal({ onComplete, _audioEnabled }) {
                   type="button"
                   className={`pin-chip ${henceSelected ? 'active' : ''}`}
                   onClick={() => setHenceSelected(true)}
-                  style={{ width: '100%', justifyContent: 'center' }}
+                  style={{ width: '100%', justifyContent: 'center', minHeight: '32px', fontSize: '0.92rem' }}
                 >
                   {henceSelected ? "✓ Final Deduction 'Hence, ∠A = ∠C' Added" : "🎯 Add Final Deduction 'Hence, ∠A = ∠C'"}
                 </button>
@@ -220,13 +219,10 @@ export default function TheFullRehearsal({ onComplete, _audioEnabled }) {
 
           {/* Right Column: Re-order Proof Steps & Run Audit */}
           <div className="station-col">
-            <div className="station-info-card" style={{ padding: '12px 18px' }}>
-              <div style={{ fontSize: '1.15rem', color: 'var(--gold)', fontWeight: 900 }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', background: 'rgba(255,255,255,0.05)', padding: '6px 12px', borderRadius: '10px' }}>
+              <span style={{ fontSize: '1rem', color: 'var(--gold)', fontWeight: 900 }}>
                 Arrange Proof Chain: Evidence ➔ Test ➔ Deduction
-              </div>
-              <div style={{ fontSize: '0.96rem', color: 'rgba(255,255,255,0.85)', fontWeight: 600 }}>
-                Use ▲ and ▼ to order the proof statements logically before curtain call.
-              </div>
+              </span>
             </div>
 
             <div className="proof-steps-list">
@@ -234,19 +230,19 @@ export default function TheFullRehearsal({ onComplete, _audioEnabled }) {
                 const step = proofSteps[stepId];
                 return (
                   <div key={step.id} className="proof-step-item">
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                      <span style={{ fontSize: '0.82rem', padding: '3px 8px', borderRadius: '6px', background: 'rgba(255,193,7,0.2)', color: 'var(--gold)', fontWeight: 900 }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                      <span style={{ fontSize: '0.75rem', padding: '2px 6px', borderRadius: '6px', background: 'rgba(255,193,7,0.2)', color: 'var(--gold)', fontWeight: 900 }}>
                         {step.badge}
                       </span>
                       <span className="proof-step-text">
                         {orderIdx + 1}. {step.text}
                       </span>
                     </div>
-                    <div style={{ display: 'flex', gap: '6px', flexShrink: 0, marginLeft: '10px' }}>
+                    <div style={{ display: 'flex', gap: '4px', flexShrink: 0, marginLeft: '8px' }}>
                       <button
                         type="button"
                         className="stepper-btn"
-                        style={{ width: '36px', height: '36px', fontSize: '1.1rem' }}
+                        style={{ width: '28px', height: '28px', fontSize: '0.95rem' }}
                         onClick={() => moveStep(orderIdx, -1)}
                         disabled={orderIdx === 0}
                         aria-label={`Move step ${orderIdx + 1} up`}
@@ -256,7 +252,7 @@ export default function TheFullRehearsal({ onComplete, _audioEnabled }) {
                       <button
                         type="button"
                         className="stepper-btn"
-                        style={{ width: '36px', height: '36px', fontSize: '1.1rem' }}
+                        style={{ width: '28px', height: '28px', fontSize: '0.95rem' }}
                         onClick={() => moveStep(orderIdx, 1)}
                         disabled={orderIdx === stepOrder.length - 1}
                         aria-label={`Move step ${orderIdx + 1} down`}
@@ -270,17 +266,19 @@ export default function TheFullRehearsal({ onComplete, _audioEnabled }) {
             </div>
 
             {/* Run Audit Button */}
-            <button
-              type="button"
-              className="btn btn-primary"
-              onClick={validateFullRehearsal}
-              style={{ padding: '12px 28px', fontSize: '1.15rem', fontWeight: 900, width: '100%' }}
-            >
-              Run Rehearsal Proof Audit 🎬
-            </button>
+            {!completed && (
+              <button
+                type="button"
+                className="btn btn-primary"
+                onClick={validateFullRehearsal}
+                style={{ padding: '8px 20px', fontSize: '1.05rem', fontWeight: 900, width: '100%', minHeight: '36px' }}
+              >
+                Run Rehearsal Proof Audit 🎬
+              </button>
+            )}
 
             {/* Validation Feedback Banner */}
-            {feedback && (
+            {feedback && !completed && (
               <div className={`station-feedback-box ${feedback.valid ? 'test' : 'ambiguous'}`}>
                 {feedback.message}
               </div>
@@ -292,13 +290,13 @@ export default function TheFullRehearsal({ onComplete, _audioEnabled }) {
                 <div className="station-success-icon">🌟</div>
                 <div className="station-success-title">Full Rehearsal Approved!</div>
                 <p className="station-success-desc">
-                  You've constructed an airtight geometric proof chain: 3 given & hidden facts ➔ SSS criterion ➔ CPCTC deduction!
+                  You've constructed an airtight geometric proof: 3 matched facts ➔ SSS criterion ➔ CPCTC deduction!
                 </p>
                 <button
                   type="button"
                   className="btn btn-primary"
                   onClick={onComplete}
-                  style={{ padding: '12px 32px', fontSize: '1.15rem', fontWeight: 900 }}
+                  style={{ padding: '8px 24px', fontSize: '1.05rem', fontWeight: 900 }}
                 >
                   Complete Station C ✓
                 </button>
@@ -310,4 +308,3 @@ export default function TheFullRehearsal({ onComplete, _audioEnabled }) {
     </div>
   );
 }
-
